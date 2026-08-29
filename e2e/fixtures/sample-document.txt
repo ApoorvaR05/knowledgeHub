@@ -1,0 +1,23 @@
+This is a sample knowledge base document used for E2E testing.
+
+Company Vacation Policy
+=======================
+
+Full-time employees are entitled to 20 days of paid vacation per year.
+Vacation days accrue at a rate of 1.67 days per month.
+Unused vacation days can be carried over to the next year, up to a maximum of 10 days.
+Vacation requests must be submitted at least 2 weeks in advance via the HR portal.
+
+Remote Work Policy
+==================
+
+Employees may work remotely up to 3 days per week.
+Remote work must be approved by the direct manager.
+Employees are expected to be available during core hours: 10am - 4pm in their local timezone.
+
+Expense Reimbursement
+=====================
+
+Business expenses up to $50 can be reimbursed without prior approval.
+Expenses above $50 require manager approval before being incurred.
+All expense claims must be submitted within 30 days of the expense date.
