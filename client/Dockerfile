@@ -3,11 +3,12 @@ FROM node:20-alpine AS builder
 
 WORKDIR /app
 
-COPY package.json yarn.lock* ./
-# Install only client deps (no server workspace)
+# Copy root workspace manifest + client manifest
+COPY package.json package-lock.json* ./
 COPY client/package.json ./client/
-RUN yarn install --frozen-lockfile
+RUN npm install --workspace=client --ignore-scripts
 
+# Copy client source
 COPY client ./client
 
 # Build args become Vite env vars at build time
@@ -16,7 +17,7 @@ ENV VITE_API_URL=$VITE_API_URL
 ENV VITE_ENABLE_MOCKS=false
 
 WORKDIR /app/client
-RUN yarn build
+RUN npm run build
 
 # ── Serve stage ───────────────────────────────────────────────────────────────
 FROM nginx:1.25-alpine

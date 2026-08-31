@@ -26,7 +26,7 @@ export const register = async (req: Request, res: Response): Promise<void> => {
   );
 
   const user = result.rows[0] as { id: number; email: string; role: string };
-  res.status(201).json({ user });
+  res.status(201).json({ token: signToken({ id: String(user.id), email: user.email, role: user.role as 'admin' | 'user' }), user });
 };
 
 export const login = async (req: Request, res: Response): Promise<void> => {
@@ -61,7 +61,7 @@ export const login = async (req: Request, res: Response): Promise<void> => {
     return;
   }
 
-  const token = signToken({ id: user.id, email: user.email, role: user.role });
+  const token = signToken({ id: String(user.id), email: user.email, role: user.role as 'admin' | 'user' });
   res.status(200).json({ token, user: { id: user.id, email: user.email, role: user.role } });
 };
 

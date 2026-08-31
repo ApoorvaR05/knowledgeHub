@@ -1,15 +1,18 @@
 import jwt from 'jsonwebtoken';
-
-const EXPIRES_IN = process.env.JWT_EXPIRES_IN || '24h';
+import { config } from '../config';
 
 export interface JwtPayload {
-  id: number;
+  id: string;
   email: string;
-  role: string;
+  role: 'admin' | 'user';
 }
 
-export const signToken = (payload: JwtPayload): string =>
-  jwt.sign(payload, process.env.JWT_SECRET as string, { expiresIn: EXPIRES_IN } as jwt.SignOptions);
+export function signToken(payload: JwtPayload): string {
+  return jwt.sign(payload, config.jwtSecret, {
+    expiresIn: config.jwtExpiresIn,
+  } as jwt.SignOptions);
+}
 
-export const verifyToken = (token: string): JwtPayload =>
-  jwt.verify(token, process.env.JWT_SECRET as string) as JwtPayload;
+export function verifyToken(token: string): JwtPayload {
+  return jwt.verify(token, config.jwtSecret) as JwtPayload;
+}
