@@ -1,6 +1,8 @@
 import { Request, Response } from 'express';
 import { validationResult } from 'express-validator';
-import { search as searchService } from '../services/searchService';
+import { SearchService } from '../services/SearchService';
+
+const searchService = new SearchService();
 
 export const search = async (req: Request, res: Response): Promise<void> => {
   const errors = validationResult(req);
@@ -17,6 +19,6 @@ export const search = async (req: Request, res: Response): Promise<void> => {
     topK = Number.isNaN(parsed) ? 5 : Math.min(parsed, 20);
   }
 
-  const results = await searchService(query, topK);
+  const results = await searchService.search(query, topK);
   res.status(200).json({ results, query });
 };
