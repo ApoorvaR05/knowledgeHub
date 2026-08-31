@@ -27,3 +27,6 @@ export async function query<T = unknown>(
   }
   return result;
 }
+
+// Default export for compatibility with Dev A's routes that import pool directly
+export default pool;

@@ -7,7 +7,7 @@ import {
   sendMessage,
 } from '../controllers/ChatController';
 
-export const chatRouter = Router();
+const chatRouter = Router();
 
 // All chat routes require authentication
 chatRouter.use(requireAuth);
@@ -16,3 +16,5 @@ chatRouter.post('/sessions', createSession);
 chatRouter.get('/sessions', listSessions);
 chatRouter.get('/sessions/:id/messages', listMessages);
 chatRouter.post('/sessions/:id/messages', sendMessage);
+
+export default chatRouter;
